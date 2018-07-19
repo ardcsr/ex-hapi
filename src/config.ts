@@ -15,7 +15,7 @@ module.exports = {
                 'jpg',
                 'jpeg',
             ],
-            pdf: ['pdf'],
+            pdf: ['pdf','png','jpg','jpeg'],
         },
         jwt: {
             timeout: '8h',

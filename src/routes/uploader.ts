@@ -11,9 +11,9 @@ const mongoObjectId = ObjectId;
 module.exports = [
     {  // Get image file data
         method: 'GET',
-        path: '/file/image/data/{id}',
+        path: '/file/image/data/{id?}',
         config: {
-           // auth: false,
+            // auth: false,
             tags: ['api'],
             description: 'Get image for UI',
             notes: 'Get image ',
@@ -51,7 +51,7 @@ module.exports = [
         method: 'POST',
         path: '/file/image',
         config: {
-          //  auth: false,
+            //  auth: false,
             tags: ['api'],
             description: 'Upload file',
             notes: 'Upload file',
@@ -138,7 +138,7 @@ module.exports = [
         method: 'POST',
         path: '/file/pdf',
         config: {
-          //  auth: false,
+            //  auth: false,
             tags: ['api'],
             description: 'Upload file',
             notes: 'Upload file',
@@ -195,10 +195,13 @@ module.exports = [
             const mongo = Util.getDb(request);
             try {
                 const res = await mongo.collection('content').find().toArray();
-                const file = res[0].pdf;
+                const file = res[0].en.contentFourth.PDF;
+                if (file === '') {
+                    return Boom.badRequest('no such or dir')
+                }
                 const resfile = await mongo.collection('pdf').findOne({ _id: mongoObjectId(file) })
                 return reply.file(pathSep.join(config.path.upload, resfile.storeName))
-                    .header('Content-Type', 'text/pdf')
+                    // .header('Content-Type', 'text/pdf')
                     .header(`Content-Disposition`, `attachment; filename=${resfile.storeName}`);
 
             } catch (error) {
@@ -210,7 +213,7 @@ module.exports = [
         method: 'DELETE',
         path: '/file/image/{id}',
         config: {
-          //  auth: false,
+            //  auth: false,
             description: 'delete iamge ',
             notes: 'delete images',
             tags: ['api'],
@@ -242,6 +245,5 @@ module.exports = [
 
         },
 
-    },
-
+    }
 ];
