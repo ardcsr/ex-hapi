@@ -12,12 +12,14 @@ const mail = (option: Info) => {
         from: `no-reply<no-reply@mg.codth.com>`, // sender address
         to: option.receiver, // adoma@adoma-jewel-manufact.com
 
-        subject: `Adoma`, // Subject line
-        html: `<b>Company Name : </b> ${option.companyName} <br>
-                   <b>Person Name : </b> ${option.personName} <br>
-                   <b>Email Address : </b> ${option.email} <br>
-                   <b>Address : </b> ${option.address} <br>
-                   <b>Inquiry : </b> ${option.inquiry} <br>
+        subject: `Jeweal`, // Subject line
+        html: `<b>Objective : </b> ${option.objective} <br>
+                   <b>I am : </b> ${option.position} <br>
+                   <b>Message : </b> ${option.msg} <br>
+                   <b>Contact person : </b> ${option.name} <br>
+                   <b>Company name : </b> ${option.company} <br>
+                   <b>Phone number : </b> ${option.tel} <br>
+                   <b>Email address : </b> ${option.mail} <br>
                     ` // html body
     };
     return new Promise((resolve, reject) => {
@@ -32,11 +34,13 @@ const mail = (option: Info) => {
 };
 
 interface Info {
-    companyName: string;
-    personName: string;
-    email: string;
-    address: string;
-    inquiry: string;
+    objective: string;
+    position: string;
+    msg: string;
+    name: string;
+    company: string;
+    tel: string;
+    mail: string;
     receiver: string;
 }
 
